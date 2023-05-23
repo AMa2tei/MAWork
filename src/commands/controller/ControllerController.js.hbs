@@ -1,0 +1,7 @@
+class {{ pascalCase controllerName }}Controller
+	extends BaseController {
+		constructor() {
+			super();
+			this.{{ camelCase controllerName }}Model = new {{ pascalCase controllerName }}Model();
+		}
+}

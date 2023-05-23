@@ -1,0 +1,15 @@
+const { DataTypes } = require( "sequelize" );
+const { sequelize } = require( "./db" );
+
+const {{pascalCase routeName}} = sequelize.define(
+	"{{pascalCase routeName}}",
+	{
+		id      : {
+			primaryKey   : true,
+			type         : DataTypes.UUID,
+			defaultValue : DataTypes.UUIDV4
+		}
+	}
+);
+
+module.exports = {{pascalCase routeName}};
