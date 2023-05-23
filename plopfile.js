@@ -41,6 +41,12 @@ export default function ( plop ) {
 					type         : "add"
 				},
 				{
+					path         : `${ process.cwd() }/front/app/views/{{ camelCase controllerName }}.js`,
+					skipIfExists : true,
+					templateFile : "src/commands/controller/ControllerView.html.hbs",
+					type         : "add"
+				},
+				{
 					path         : `${ process.cwd() }/front/app/controllers/{{ camelCase controllerName }}Controller.js`,
 					skipIfExists : true,
 					templateFile : "src/commands/controller/ControllerController.js.hbs",
