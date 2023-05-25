@@ -3,7 +3,10 @@
 	"version": "1.0.0",
 	"description": "CLI du framework MAWork",
 	"main": "index.js",
-	"type" : "module",
+	"type": "module",
+	"bin": {
+		"mawork": "./index.js"
+	},
 	"scripts": {
 		"plop": "plop"
 	},

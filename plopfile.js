@@ -16,7 +16,7 @@ export default function ( plop ) {
 					skipIfExists  : true,
 					templateFiles : "src/back",
 					type          : "addMany"
-				},
+				}
 			
 			],
 			description : "Framework MAWork",
@@ -62,13 +62,13 @@ export default function ( plop ) {
 					path     : `${ process.cwd() }/front/index.html`,
 					pattern  : /(<!-- MAWORK CLI API NE PAS TOUCHER -->)/g,
 					template : "<script type=\"application/ecmascript\" src=\"app/services/{{ camelCase controllerName }}Api.js\"></script>",
-					type     : "append",
+					type     : "append"
 				},
 				{
 					path     : `${ process.cwd() }/front/index.html`,
 					pattern  : /(<!-- MAWORK CLI MODEL NE PAS TOUCHER -->)/g,
 					template : "<script type=\"application/ecmascript\" src=\"app/model/{{ camelCase controllerName }}Model.js\"></script>",
-					type     : "append",
+					type     : "append"
 				}
 			],
 			description : "Contrôleur pour le front de votre application MAWork",
@@ -108,7 +108,7 @@ export default function ( plop ) {
 					path     : `${ process.cwd() }/back/src/core/web-server.js`,
 					pattern  : /(\/\/ MAWORK CLI NE PAS TOUCHER)/g,
 					template : "this.app.use( \"/{{camelCase routeName}}\", userRoutes.initializeRoutes() );",
-					type     : "append",
+					type     : "append"
 				}
 			],
 			description : "Route pour le back de votre application MAWork",
