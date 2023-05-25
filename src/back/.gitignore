@@ -1,7 +1,9 @@
 node_modules
-.env
-.env.docker
-.env.sequelize
-.env.tests
 uploads
 .idea
+
+# A décommenter lors de la mise en place du dépot Git
+# .env
+# .env.docker
+# .env.sequelize
+# .env.tests

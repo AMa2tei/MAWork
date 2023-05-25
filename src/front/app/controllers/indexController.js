@@ -1,4 +1,4 @@
-import BaseController from "./basecontroller.js";
+import BaseController from "./baseController.js";
 import MyModel        from "../model/model.js";
 
 class IndexController extends BaseController {

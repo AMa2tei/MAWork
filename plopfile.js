@@ -41,7 +41,7 @@ export default function ( plop ) {
 					type         : "add"
 				},
 				{
-					path         : `${ process.cwd() }/front/app/views/{{ camelCase controllerName }}.js`,
+					path         : `${ process.cwd() }/front/views/{{ camelCase controllerName }}.html`,
 					skipIfExists : true,
 					templateFile : "src/commands/controller/ControllerView.html.hbs",
 					type         : "add"
