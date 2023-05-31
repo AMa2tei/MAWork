@@ -2,7 +2,6 @@ const express          = require( "express" );
 const { body }         = require( "express-validator" );
 const router           = express.Router();
 const {{camelCase routeName}}          = require( "../models/{{camelCase routeName}}.model" );
-const { validateBody } = require( "./validation/route.validator" );
 const jwt              = require( "jsonwebtoken" );
 
 router.get(
@@ -13,7 +12,9 @@ router.get(
 	) => {
 		res.status( 200 )
 		   .send(
-		       await imageTropBienLeSang.findAll()
+		       await {{camelCase routeName}}.findAll()
 		   );
 	}
 );
+
+exports.initializeRoutes = () => router;

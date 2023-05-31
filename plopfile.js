@@ -1,6 +1,6 @@
 export default function ( plop ) {
 	plop.setGenerator(
-		"project",
+		"Projet",
 		{
 			actions     : [
 				{
@@ -31,9 +31,9 @@ export default function ( plop ) {
 	);
 	
 	plop.setGenerator(
-		"controller",
+		"MVC",
 		{
-			actions     : [
+			actions : [
 				{
 					path         : `${ process.cwd() }/front/app/services/{{ camelCase controllerName }}Api.js`,
 					skipIfExists : true,
@@ -83,7 +83,7 @@ export default function ( plop ) {
 	);
 	
 	plop.setGenerator(
-		"route",
+		"Route",
 		{
 			actions     : [
 				{
@@ -99,15 +99,21 @@ export default function ( plop ) {
 					type         : "add"
 				},
 				{
-					path         : `${ process.cwd() }/back/tests/{{ camelCase routeName }}.model.js`,
+					path         : `${ process.cwd() }/back/tests/{{ camelCase routeName }}.test.js`,
 					skipIfExists : true,
 					templateFile : "src/commands/routes/route.test.js.hbs",
 					type         : "add"
 				},
 				{
 					path     : `${ process.cwd() }/back/src/core/web-server.js`,
+					pattern  : /(\/\/ MAWORK CLI Import NE PAS TOUCHER)/g,
+					template : "const {{camelCase routeName}} = require( \"../controllers/{{camelCase routeName}}.routes\" );",
+					type     : "append"
+				},
+				{
+					path     : `${ process.cwd() }/back/src/core/web-server.js`,
 					pattern  : /(\/\/ MAWORK CLI NE PAS TOUCHER)/g,
-					template : "this.app.use( \"/{{camelCase routeName}}\", userRoutes.initializeRoutes() );",
+					template : "this.app.use( \"/{{camelCase routeName}}\", {{camelCase routeName}}.initializeRoutes() );",
 					type     : "append"
 				}
 			],
@@ -116,6 +122,95 @@ export default function ( plop ) {
 				{
 					message : "Nom de la route :",
 					name    : "routeName",
+					type    : "input"
+				}
+			]
+		}
+	);
+	
+	plop.setGenerator(
+		"Association",
+		{
+			actions     : function ( data ) {
+				let actions = [];
+				
+				actions.push(
+					{
+						path     : `${ process.cwd() }/back/src/models/{{ camelCase firstEntityName }}.model.js`,
+						pattern  : /(\/\/ MAWORK CLI AJOUT IMPORT NE PAS TOUCHER)/g,
+						template : "const {{pascalCase secondEntityName}} = require( \"./{{ camelCase secondEntityName }}.model\" );",
+						type     : "append"
+					},
+				);
+				
+				switch ( data.associationType ) {
+					case "oneToOne": {
+						actions.push(
+							{
+								path     : `${ process.cwd() }/back/src/models/{{ camelCase firstEntityName }}.model.js`,
+								pattern  : /(\/\/ MAWORK CLI AJOUT MODEL NE PAS TOUCHER)/g,
+								template : "{{pascalCase secondEntityName}}.hasOne( {{pascalCase firstEntityName}} );\n" +
+								           "{{pascalCase firstEntityName}}.belongsTo( {{pascalCase secondEntityName}} );",
+								type     : "append"
+							},
+						);
+						break;
+					}
+					case "oneToMany": {
+						actions.push(
+							{
+								path     : `${ process.cwd() }/back/src/models/{{ camelCase firstEntityName }}.model.js`,
+								pattern  : /(\/\/ MAWORK CLI AJOUT MODEL NE PAS TOUCHER)/g,
+								template : "{{pascalCase secondEntityName}}.hasMany( {{pascalCase firstEntityName}} );\n" +
+								           "{{pascalCase firstEntityName}}.belongsTo( {{pascalCase secondEntityName}} );",
+								type     : "append"
+							},
+						);
+						break;
+					}
+					case "ManyToMany": {
+						actions.push(
+							{
+								path     : `${ process.cwd() }/back/src/models/{{ camelCase firstEntityName }}.model.js`,
+								pattern  : /(\/\/ MAWORK CLI AJOUT MODEL NE PAS TOUCHER)/g,
+								template : "{{pascalCase firstEntityName}}.belongsToMany( {{pascalCase secondEntityName}}, {through: {{camelCase firstEntityName}}{{pascalCase secondEntityName}}} );",
+								type     : "append"
+							},
+						);
+						break;
+					}
+				}
+				return actions;
+			},
+			description : "Association de deux entités définies dans le back de votre application MAWork",
+			prompts     : [
+				{
+					message : "Type d'association :",
+					name    : "associationType",
+					type    : "list",
+					choices : [
+						{
+							name  : "One-To-One",
+							value : "oneToOne"
+						},
+						{
+							name  : "One-To-Many",
+							value : "oneToMany"
+						},
+						{
+							name  : "Many-To-Many",
+							value : "manyToMany"
+						}
+					]
+				},
+				{
+					message : "Nom de la première entité :",
+					name    : "firstEntityName",
+					type    : "input"
+				},
+				{
+					message : "Nom de la seconde entité :",
+					name    : "secondEntityName",
 					type    : "input"
 				}
 			]
