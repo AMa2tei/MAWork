@@ -1,8 +1,10 @@
 export default function ( plop ) {
+	plop.setWelcomeMessage( " === Framework MAWork === \n" +
+	                        "Sélectionnez les éléments que vous voulez générer." );
 	plop.setGenerator(
 		"Projet",
 		{
-			actions     : [
+			actions : [
 				{
 					base          : "src/front",
 					destination   : `${ process.cwd() }/{{ pascalCase name }}/front`,
@@ -59,6 +61,12 @@ export default function ( plop ) {
 					type         : "add"
 				},
 				{
+					path         : `${ process.cwd() }/front/res/css/{{ camelCase controllerName }}Stylesheet.scss`,
+					skipIfExists : true,
+					templateFile : "src/commands/controller/ControllerStylesheet.scss",
+					type         : "add"
+				},
+				{
 					path     : `${ process.cwd() }/front/index.html`,
 					pattern  : /(<!-- MAWORK CLI API NE PAS TOUCHER -->)/g,
 					template : "<script type=\"application/ecmascript\" src=\"app/services/{{ camelCase controllerName }}Api.js\"></script>",
@@ -68,6 +76,12 @@ export default function ( plop ) {
 					path     : `${ process.cwd() }/front/index.html`,
 					pattern  : /(<!-- MAWORK CLI MODEL NE PAS TOUCHER -->)/g,
 					template : "<script type=\"application/ecmascript\" src=\"app/model/{{ camelCase controllerName }}Model.js\"></script>",
+					type     : "append"
+				},
+				{
+					path     : `${ process.cwd() }/front/res/css/index.scss`,
+					pattern  : /(\/\/ MAWORK CLI SCSS IMPORTER NE PAS TOUCHER)/g,
+					template : "@import \"{{ camelCase controllerName }}Stylesheet\";",
 					type     : "append"
 				}
 			],
