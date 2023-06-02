@@ -85,7 +85,7 @@ export default function ( plop ) {
 					type     : "append"
 				}
 			],
-			description : "Contrôleur pour l'application Client de votre application MAWork",
+			description : "Contrôleur pour l’application Client de votre application MAWork",
 			prompts     : [
 				{
 					type    : "input",
@@ -131,7 +131,7 @@ export default function ( plop ) {
 					type     : "append"
 				}
 			],
-			description : "Route pour l'application Serveur de votre application MAWork",
+			description : "Route pour l’application Serveur de votre application MAWork",
 			prompts     : [
 				{
 					message : "Nom de la route :",
