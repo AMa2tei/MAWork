@@ -1,10 +1,10 @@
 export default function ( plop ) {
 	plop.setWelcomeMessage( " === Framework MAWork === \n" +
-	                        "Sélectionnez les éléments que vous voulez générer." );
+								"Sélectionnez les éléments que vous voulez générer." );
 	plop.setGenerator(
 		"Projet",
 		{
-			actions : [
+			actions     : [
 				{
 					base          : "src/front",
 					destination   : `${ process.cwd() }/{{ pascalCase name }}/front`,
@@ -19,7 +19,6 @@ export default function ( plop ) {
 					templateFiles : "src/back",
 					type          : "addMany"
 				}
-			
 			],
 			description : "Framework MAWork",
 			prompts     : [
@@ -35,7 +34,7 @@ export default function ( plop ) {
 	plop.setGenerator(
 		"MVC",
 		{
-			actions : [
+			actions     : [
 				{
 					path         : `${ process.cwd() }/front/app/services/{{ camelCase controllerName }}Api.js`,
 					skipIfExists : true,
@@ -154,7 +153,7 @@ export default function ( plop ) {
 						pattern  : /(\/\/ MAWORK CLI AJOUT IMPORT NE PAS TOUCHER)/g,
 						template : "const {{pascalCase secondEntityName}} = require( \"./{{ camelCase secondEntityName }}.model\" );",
 						type     : "append"
-					},
+					}
 				);
 				
 				switch ( data.associationType ) {
@@ -162,11 +161,11 @@ export default function ( plop ) {
 						actions.push(
 							{
 								path     : `${ process.cwd() }/back/src/models/{{ camelCase firstEntityName }}.model.js`,
-								pattern  : /(\/\/ MAWORK CLI AJOUT MODEL NE PAS TOUCHER)/g,
+								pattern  : /(\/\/ MAWORK CLI AJOUT ASSOCIATIONS NE PAS TOUCHER)/g,
 								template : "{{pascalCase secondEntityName}}.hasOne( {{pascalCase firstEntityName}} );\n" +
-								           "{{pascalCase firstEntityName}}.belongsTo( {{pascalCase secondEntityName}} );",
+									"{{pascalCase firstEntityName}}.belongsTo( {{pascalCase secondEntityName}} );",
 								type     : "append"
-							},
+							}
 						);
 						break;
 					}
@@ -174,11 +173,11 @@ export default function ( plop ) {
 						actions.push(
 							{
 								path     : `${ process.cwd() }/back/src/models/{{ camelCase firstEntityName }}.model.js`,
-								pattern  : /(\/\/ MAWORK CLI AJOUT MODEL NE PAS TOUCHER)/g,
+								pattern  : /(\/\/ MAWORK CLI AJOUT ASSOCIATIONS NE PAS TOUCHER)/g,
 								template : "{{pascalCase secondEntityName}}.hasMany( {{pascalCase firstEntityName}} );\n" +
-								           "{{pascalCase firstEntityName}}.belongsTo( {{pascalCase secondEntityName}} );",
+									"{{pascalCase firstEntityName}}.belongsTo( {{pascalCase secondEntityName}} );",
 								type     : "append"
-							},
+							}
 						);
 						break;
 					}
@@ -186,10 +185,10 @@ export default function ( plop ) {
 						actions.push(
 							{
 								path     : `${ process.cwd() }/back/src/models/{{ camelCase firstEntityName }}.model.js`,
-								pattern  : /(\/\/ MAWORK CLI AJOUT MODEL NE PAS TOUCHER)/g,
+								pattern  : /(\/\/ MAWORK CLI AJOUT ASSOCIATIONS NE PAS TOUCHER)/g,
 								template : "{{pascalCase firstEntityName}}.belongsToMany( {{pascalCase secondEntityName}}, {through: {{camelCase firstEntityName}}{{pascalCase secondEntityName}}} );",
 								type     : "append"
-							},
+							}
 						);
 						break;
 					}
