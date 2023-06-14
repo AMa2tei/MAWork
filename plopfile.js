@@ -142,6 +142,28 @@ export default function ( plop ) {
 	);
 	
 	plop.setGenerator(
+		"Entité",
+		{
+			actions     : [
+				{
+					path         : `${ process.cwd() }/back/src/models/{{ camelCase routeName }}.model.js`,
+					skipIfExists : true,
+					templateFile : "src/commands/routes/route.model.js.hbs",
+					type         : "add"
+				}
+			],
+			description : "Entité pour l’application Serveur de votre application MAWork",
+			prompts     : [
+				{
+					message : "Nom de l'entité :",
+					name    : "routeName",
+					type    : "input"
+				}
+			]
+		}
+	);
+	
+	plop.setGenerator(
 		"Association",
 		{
 			actions     : function ( data ) {
