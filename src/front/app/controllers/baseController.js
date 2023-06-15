@@ -1,4 +1,4 @@
-export default class BaseController {
+class BaseController {
     constructor() {
         this.setBackButtonView('index')
     }

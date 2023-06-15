@@ -1,15 +1,15 @@
-import BaseController from "./baseController.js";
-import MyModel        from "../model/model.js";
+import MyModel from "../model/model.js";
 
-class IndexController extends BaseController {
-    constructor() {
-        super()
-        this.model = new MyModel()
-    }
-
-    sayHello() {
-        this.toast("bonjourToast")
-    }
+class IndexController
+	extends BaseController {
+	constructor() {
+		super();
+		this.model = new MyModel();
+	}
+	
+	sayHello() {
+		this.toast( "bonjourToast" );
+	}
 }
 
-export default () => window.indexController = new IndexController()
+window.indexController = new IndexController();
