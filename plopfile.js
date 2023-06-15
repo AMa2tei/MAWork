@@ -1,6 +1,6 @@
 export default function ( plop ) {
 	plop.setWelcomeMessage( " === Framework MAWork === \n" +
-								"Sélectionnez les éléments que vous voulez générer." );
+	                        "Sélectionnez les éléments que vous voulez générer." );
 	plop.setGenerator(
 		"Projet",
 		{
@@ -96,6 +96,46 @@ export default function ( plop ) {
 	);
 	
 	plop.setGenerator(
+		"Vue",
+		{
+			actions     : [
+				{
+					path         : `${ process.cwd() }/front/views/{{ camelCase controllerName }}.html`,
+					skipIfExists : true,
+					templateFile : "src/commands/controller/ControllerView.html.hbs",
+					type         : "add"
+				},
+				{
+					path         : `${ process.cwd() }/front/app/controllers/{{ camelCase controllerName }}Controller.js`,
+					skipIfExists : true,
+					templateFile : "src/commands/controller/ControllerController.js.hbs",
+					type         : "add"
+				},
+				{
+					path         : `${ process.cwd() }/front/res/css/{{ camelCase controllerName }}Stylesheet.scss`,
+					skipIfExists : true,
+					templateFile : "src/commands/controller/ControllerStylesheet.scss",
+					type         : "add"
+				},
+				{
+					path     : `${ process.cwd() }/front/res/css/index.scss`,
+					pattern  : /(\/\/ MAWORK CLI SCSS IMPORTER NE PAS TOUCHER)/g,
+					template : "@import \"{{ camelCase controllerName }}Stylesheet\";",
+					type     : "append"
+				}
+			],
+			description : "Vue pour l’application Client de votre application MAWork",
+			prompts     : [
+				{
+					type    : "input",
+					name    : "controllerName",
+					message : "Nom de la vue :"
+				}
+			]
+		}
+	);
+	
+	plop.setGenerator(
 		"Route",
 		{
 			actions     : [
@@ -185,7 +225,7 @@ export default function ( plop ) {
 								path     : `${ process.cwd() }/back/src/models/{{ camelCase firstEntityName }}.model.js`,
 								pattern  : /(\/\/ MAWORK CLI AJOUT ASSOCIATIONS NE PAS TOUCHER)/g,
 								template : "{{pascalCase secondEntityName}}.hasOne( {{pascalCase firstEntityName}} );\n" +
-									"{{pascalCase firstEntityName}}.belongsTo( {{pascalCase secondEntityName}} );",
+								           "{{pascalCase firstEntityName}}.belongsTo( {{pascalCase secondEntityName}} );",
 								type     : "append"
 							}
 						);
@@ -197,7 +237,7 @@ export default function ( plop ) {
 								path     : `${ process.cwd() }/back/src/models/{{ camelCase firstEntityName }}.model.js`,
 								pattern  : /(\/\/ MAWORK CLI AJOUT ASSOCIATIONS NE PAS TOUCHER)/g,
 								template : "{{pascalCase secondEntityName}}.hasMany( {{pascalCase firstEntityName}} );\n" +
-									"{{pascalCase firstEntityName}}.belongsTo( {{pascalCase secondEntityName}} );",
+								           "{{pascalCase firstEntityName}}.belongsTo( {{pascalCase secondEntityName}} );",
 								type     : "append"
 							}
 						);
