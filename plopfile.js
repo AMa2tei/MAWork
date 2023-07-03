@@ -4,6 +4,14 @@ export default function (plop) {
 	plop.setGenerator(
 		"Projet",
 		{
+			description: "Framework MAWork",
+			prompts    : [
+				{
+					message: "Nom du projet :",
+					name   : "name",
+					type   : "input"
+				}
+			],
 			actions    : [
 				{
 					base         : "src/front",
@@ -18,14 +26,6 @@ export default function (plop) {
 					skipIfExists : true,
 					templateFiles: "src/back",
 					type         : "addMany"
-				}
-			],
-			description: "Framework MAWork",
-			prompts    : [
-				{
-					message: "Nom du projet :",
-					name   : "name",
-					type   : "input"
 				}
 			]
 		}
@@ -224,8 +224,8 @@ export default function (plop) {
 							{
 								path    : `${process.cwd()}/back/src/models/{{ camelCase firstEntityName }}.model.js`,
 								pattern : /(\/\/ MAWORK CLI AJOUT ASSOCIATIONS NE PAS TOUCHER)/g,
-								template: "{{pascalCase secondEntityName}}.hasOne( {{pascalCase firstEntityName}} );\n" +
-									"{{pascalCase firstEntityName}}.belongsTo( {{pascalCase secondEntityName}} );",
+								template: "{{pascalCase firstEntityName}}.hasOne( {{pascalCase secondEntityName}} );\n" +
+								          "{{pascalCase secondEntityName}}.belongsTo( {{pascalCase firstEntityName}} );",
 								type    : "append"
 							}
 						);
@@ -248,7 +248,7 @@ export default function (plop) {
 							{
 								path    : `${process.cwd()}/back/src/models/{{ camelCase firstEntityName }}.model.js`,
 								pattern : /(\/\/ MAWORK CLI AJOUT ASSOCIATIONS NE PAS TOUCHER)/g,
-								template: "{{pascalCase firstEntityName}}.belongsToMany( {{pascalCase secondEntityName}}, {through: {{camelCase firstEntityName}}{{pascalCase secondEntityName}}} );",
+								template: "{{pascalCase secondEntityName}}.belongsToMany( {{pascalCase firstEntityName}}, {through: {{camelCase firstEntityName}}{{pascalCase secondEntityName}}} );",
 								type    : "append"
 							}
 						);
@@ -265,7 +265,7 @@ export default function (plop) {
 					type   : "list",
 					choices: [
 						{
-							name : "One-To-One (la première entité peut contenir une seule instances de la seconde entité et vice-versa)",
+							name : "One-To-One (la première entité peut contenir une seule instance de la seconde entité et vice-versa)",
 							value: "oneToOne"
 						},
 						{
