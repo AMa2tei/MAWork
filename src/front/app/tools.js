@@ -10,10 +10,6 @@ function $(
 	}
 }
 
-/**
- * Méthodes pour le JSON Fetcher
- * @type {{post: string, get: string, delete: string, put: string}}
- */
 const methods = {
 	post  : "POST",
 	put   : "PUT",
@@ -21,15 +17,6 @@ const methods = {
 	get   : "GET"
 };
 
-/**
- * JSON Fetcher
- * @param api
- * @param method : string used
- * @param url
- * @param token
- * @param body
- * @returns {Promise<unknown>}
- */
 function fetchJSON(
 	api,
 	method,
