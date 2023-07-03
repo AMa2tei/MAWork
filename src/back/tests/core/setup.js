@@ -1,5 +1,6 @@
-require( "dotenv" ).config();
-const WebServer = require( "../../src/core/web-server" );
+require("dotenv")
+	.config();
+const WebServer = require("../../src/core/web-server");
 
 module.exports = async () => {
 	const webServer = new WebServer();

@@ -2,4 +2,20 @@ class {{ pascalCase controllerName }}Model {
 	constructor() {
 		this.api = new {{ pascalCase controllerName }}Api();
 	}
+
+    getAll{{ pascalCase controllerName }} () {
+        return await this.api.getAll{{ pascalCase controllerName }}();
+    }
+
+    post{{ pascalCase controllerName }} (body) {
+        return await this.api.post{{ pascalCase controllerName }}(body);
+    }
+
+    update{{ pascalCase controllerName }} (body) {
+        return await this.api.update{{ pascalCase controllerName }}(body);
+    }
+
+    delete{{ pascalCase controllerName }} (body) {
+        return await this.api.delete{{ pascalCase controllerName }}(body);
+    }
 }

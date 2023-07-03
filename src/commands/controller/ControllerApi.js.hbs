@@ -3,4 +3,52 @@ class {{ pascalCase controllerName }}Api {
 		this.api   = "http://127.0.0.1:3000/{{ lowerCase controllerName }}";
 		this.token = window.sessionStorage.getItem( "token" );
 	}
+
+    getAll{{ pascalCase controllerName }} () {
+        return fetchJSON(
+            this.api,
+            methods.get,
+            "/{{ camelCase controllerName }}",
+            this.token
+        );
+    }
+
+    getOne{{ pascalCase controllerName }} () {
+        return fetchJSON(
+            this.api,
+            methods.get,
+            "",
+            this.token
+        );
+    }
+
+    post{{ pascalCase controllerName }} (body) {
+        return fetchJSON(
+            this.api,
+            methods.post,
+            "",
+            this.token,
+            body
+        );
+    }
+
+    update{{ pascalCase controllerName }} (body) {
+        return fetchJSON(
+            this.api,
+            methods.put,
+            "",
+            this.token,
+            body
+        );
+    }
+
+    delete{{ pascalCase controllerName }} (body) {
+        return fetchJSON(
+            this.api,
+            methods.delete,
+            "",
+            this.token,
+            body
+        );
+    }
 }

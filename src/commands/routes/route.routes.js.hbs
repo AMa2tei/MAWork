@@ -1,7 +1,7 @@
 const express          = require( "express" );
 const { body }         = require( "express-validator" );
 const router           = express.Router();
-const {{camelCase routeName}}          = require( "../models/{{camelCase routeName}}.model" );
+const {{pascalCase routeName}}          = require( "../models/{{camelCase routeName}}.model" );
 const jwt              = require( "jsonwebtoken" );
 
 router.get(
@@ -12,9 +12,78 @@ router.get(
 	) => {
 		res.status( 200 )
 		   .send(
-		       await {{camelCase routeName}}.findAll()
+		       await {{ pascalCase routeName }}.findAll()
 		   );
 	}
+);
+
+router.post(
+    "/",
+    async (
+        req,
+        res
+    ) => {
+        const {{ camelCase routeName }} = {{ pascalCase routeName }}.build(
+            req.body
+        );
+
+        {{ camelCase routeName }}.save()
+                  .then(
+                        {{ camelCase routeName }} ==>{
+                            res.status(200)
+                                .json( {
+                                    "success" : {{ camelCase routeName }}
+                                } )
+                        }
+                  )
+
+    }
+);
+
+router.put(
+    "/",
+    async (
+        req,
+        res
+    ) => {
+        {{ pascalCase routeName }}.update(
+            req.body,
+            where : {
+                id : req.body.id
+            }
+        )
+            .then(
+                {{ camelCase routeName }} ==>{
+                    res.status(200)
+                        .json( {
+                            "success" : {{ camelCase routeName }}
+                        } )
+                }
+            )
+
+    }
+);
+
+router.delete(
+    "/",
+    async (
+        req,
+        res
+    ) => {
+        {{ pascalCase routeName }}.delete(
+            where : {
+                id : req.body.id
+            }
+        )
+            .then(
+                {{ camelCase routeName }} ==>{
+                    res.status(200)
+                        .json( {
+                            "success" : {{ camelCase routeName }}
+                        } )
+                }
+            )
+    }
 );
 
 exports.initializeRoutes = () => router;

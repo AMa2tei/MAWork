@@ -1,17 +1,17 @@
 {
-	"name": "project-back",
-	"version": "1.0.0",
-	"description": "Partie serveur de l'application",
-	"main": "index.js",
-	"scripts": {
-		"start": "node index.js",
-		"test": "jest --detectOpenHandles",
-		"docker" : "docker-composer up"
-	},
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-	},
-	"devDependencies": {
-	}
+  "name": "project-back",
+  "version": "1.0.0",
+  "description": "Partie serveur de l'application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest --detectOpenHandles",
+    "docker": "docker-composer up"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
 }

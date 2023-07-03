@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-import path, { dirname } from "node:path";
-import minimist          from "minimist";
+import minimist        from "minimist";
+import path, {dirname} from "node:path";
+import {fileURLToPath} from "node:url";
 import {
 	Plop,
 	run
-}                        from "plop";
-import { fileURLToPath } from "node:url";
+}                      from "plop";
 
 const args = process.argv.slice( 2 );
 const argv = minimist( args );
