@@ -143,22 +143,3 @@ function navigate(
 function getNavParamsByName(name) {
 	return window[name];
 }
-
-const dateFormat = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
-
-function reviver(
-	key,
-	value
-) {
-	if (typeof value === "string" && dateFormat.test(value)) {
-		return new Date(value);
-	}
-	return value;
-}
-
-function getParameterByName( name ) {
-	let match = RegExp( "[?&]" + name + "=([^&]*)" )
-		.exec( window.location.search );
-	return match && decodeURIComponent( match[ 1 ].replace( /\+/g,
-	                                                        ' ' ) );
-}
