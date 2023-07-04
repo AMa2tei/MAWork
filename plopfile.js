@@ -243,19 +243,19 @@ export default function (plop) {
 					source : function (answersSoFar, input) {
 						return new Promise(function (resolve) {
 							let types = [
-								"String",
-								"Binary",
-								"Text",
-								"Boolean",
-								"Integer",
 								"BigInt",
-								"Float",
-								"Double",
-								"Decimal",
+								"Binary",
+								"Boolean",
 								"Date",
 								"DateOnly",
+								"Decimal",
+								"Double",
+								"Float",
+								"Integer",
+								"String",
+								"Text",
 								"UUID"
-							].sort();
+							];
 							resolve(types);
 						});
 					}
