@@ -1,19 +1,19 @@
-import * as fs from "fs";
-import autocompletePrompt from 'inquirer-autocomplete-prompt';
+import * as fs            from "fs";
+import autocompletePrompt from "inquirer-autocomplete-prompt";
 
 export default function (plop) {
-	plop.setPrompt('autocomplete', autocompletePrompt);
+	plop.setPrompt("autocomplete", autocompletePrompt);
 	plop.setWelcomeMessage(" === Framework MAWork === \n" +
 		"Sélectionnez les éléments que vous voulez générer.");
 	plop.setGenerator(
 		"Projet",
 		{
 			description: "Framework MAWork",
-			prompts: [
+			prompts    : [
 				{
 					message: "Nom du projet :",
-					name: "name",
-					type: "input"
+					name   : "name",
+					type   : "input"
 				}
 			],
 			actions    : [
@@ -185,6 +185,7 @@ export default function (plop) {
 		}
 	);
 
+	// Générateur d'entité. On doit pouvoir passer en paramètre le nom de l'entité, et la possibilité d'ajouter plusieurs champs à l'entité
 	plop.setGenerator(
 		"Entité",
 		{
@@ -207,10 +208,73 @@ export default function (plop) {
 		}
 	);
 
+	// Possibilité d'ajouter un champ à une entité
+	plop.setGenerator(
+		"Champ",
+		{
+			actions    : [
+				{
+					path    : `${process.cwd()}/back/src/models/{{ camelCase entiteName }}.model.js`,
+					pattern : /(\/\/ MAWORK CLI AJOUT CHAMP NE PAS TOUCHER)/g,
+					template: "\t\t{{camelCase champName}}: {\n\t\t\ttype: DataTypes.{{type}},\n\t\t\trequired: {{required}}\n\t\t},",
+					type    : "append"
+				}
+			],
+			description: "Champ pour l’application Serveur de votre application MAWork",
+			prompts    : [
+				{
+					message: "Nom de l'entité :",
+					name   : "entiteName",
+					type   : "autocomplete",
+					source : function (answersSoFar, input) {
+						return new Promise(function (resolve) {
+							let entites = fs.readdirSync(`${process.cwd()}/back/src/models`).filter(file => file !== "index.js").filter(file => file !== "db.js").map(file => file.split(".")[0]);
+							resolve(entites);
+						});
+					}
+				},
+				{
+					message: "Nom du champ :",
+					name   : "champName",
+					type   : "input"
+				},
+				{
+					message: "Type du champ :",
+					name   : "type",
+					type   : "autocomplete",
+					source : function (answersSoFar, input) {
+						return new Promise(function (resolve) {
+							let types = [
+								"String",
+								"Binary",
+								"Text",
+								"Boolean",
+								"Integer",
+								"BigInt",
+								"Float",
+								"Double",
+								"Decimal",
+								"Date",
+								"DateOnly",
+								"UUID"
+							].sort();
+							resolve(types);
+						});
+					}
+				},
+				{
+					message: "Champ requis ?",
+					name   : "required",
+					type   : "confirm"
+				}
+			]
+		}
+	);
+
 	plop.setGenerator(
 		"Association",
 		{
-			actions    : function (data) {
+			actions: function (data) {
 				let actions = [];
 
 				actions.push(
