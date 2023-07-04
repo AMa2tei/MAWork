@@ -70,7 +70,7 @@ router.delete(
         req,
         res
     ) => {
-        {{ pascalCase routeName }}.delete(
+        {{ pascalCase routeName }}.destroy(
             where : {
                 id : req.body.id
             }

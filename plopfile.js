@@ -210,14 +210,31 @@ export default function (plop) {
 	plop.setGenerator(
 		"Champ",
 		{
-			actions    : [
-				{
-					path    : `${process.cwd()}/back/src/models/{{ camelCase entiteName }}.model.js`,
-					pattern : /(\/\/ MAWORK CLI AJOUT CHAMP NE PAS TOUCHER)/g,
-					template: "\t\t{{camelCase champName}}: {\n\t\t\ttype: DataTypes.{{type}},\n\t\t\trequired: {{required}}\n\t\t},",
-					type    : "append"
+			actions    : data => {
+				let actions = [];
+
+				// Check if required = true
+				if (data.required === "true") {
+					actions.push(
+						{
+							path    : `${process.cwd()}/back/src/models/{{ camelCase entiteName }}.model.js`,
+							pattern : /(\/\/ MAWORK CLI AJOUT CHAMP NE PAS TOUCHER)/g,
+							template: "\t\t{{camelCase champName}}: {\n\t\t\ttype: DataTypes.{{type}},\n\t\t\tallowNull: false\n\t\t\tunique: {{unique}}\n\t\t},",
+							type    : "append"
+						}
+					);
+				} else {
+					actions.push(
+						{
+							path    : `${process.cwd()}/back/src/models/{{ camelCase entiteName }}.model.js`,
+							pattern : /(\/\/ MAWORK CLI AJOUT CHAMP NE PAS TOUCHER)/g,
+							template: "\t\t{{camelCase champName}}: {\n\t\t\ttype: DataTypes.{{type}},\n\t\t\tallowNull: true\n\t\t\tunique: {{unique}}\n\t\t},",
+							type    : "append"
+						}
+					);
 				}
-			],
+				return actions;
+			},
 			description: "Champ pour l’application Serveur de votre application MAWork",
 			prompts    : [
 				{
@@ -263,6 +280,11 @@ export default function (plop) {
 				{
 					message: "Champ requis ?",
 					name   : "required",
+					type   : "confirm"
+				},
+				{
+					message: "Champ unique ?",
+					name   : "unique",
 					type   : "confirm"
 				}
 			]
