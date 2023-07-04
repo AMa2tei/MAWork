@@ -29,7 +29,7 @@ router.post(
 
         {{ camelCase routeName }}.save()
                   .then(
-                        {{ camelCase routeName }} ==>{
+                        {{ camelCase routeName }} =>{
                             res.status(200)
                                 .json( {
                                     "success" : {{ camelCase routeName }}
@@ -48,12 +48,14 @@ router.put(
     ) => {
         {{ pascalCase routeName }}.update(
             req.body,
-            where : {
-                id : req.body.id
+            {
+                where : {
+                    id : req.body.id
+                }
             }
         )
             .then(
-                {{ camelCase routeName }} ==>{
+                {{ camelCase routeName }} => {
                     res.status(200)
                         .json( {
                             "success" : {{ camelCase routeName }}
@@ -71,12 +73,14 @@ router.delete(
         res
     ) => {
         {{ pascalCase routeName }}.destroy(
-            where : {
-                id : req.body.id
+            {
+                where : {
+                    id : req.body.id
+                }
             }
         )
             .then(
-                {{ camelCase routeName }} ==>{
+                {{ camelCase routeName }} =>{
                     res.status(200)
                         .json( {
                             "success" : {{ camelCase routeName }}
