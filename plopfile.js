@@ -243,17 +243,17 @@ export default function (plop) {
 					source : function (answersSoFar, input) {
 						return new Promise(function (resolve) {
 							let types = [
-								"BigInt",
-								"Binary",
-								"Boolean",
-								"Date",
-								"DateOnly",
-								"Decimal",
-								"Double",
-								"Float",
-								"Integer",
-								"String",
-								"Text",
+								"BIGINT",
+								"BINARY",
+								"BOOLEAN",
+								"DATE",
+								"DATEONLY",
+								"DECIMAL",
+								"DOUBLE",
+								"FLOAT",
+								"INTEGER",
+								"STRING",
+								"TEXT",
 								"UUID"
 							];
 							resolve(types);
