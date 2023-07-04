@@ -185,13 +185,12 @@ export default function (plop) {
 		}
 	);
 
-	// Générateur d'entité. On doit pouvoir passer en paramètre le nom de l'entité, et la possibilité d'ajouter plusieurs champs à l'entité
 	plop.setGenerator(
 		"Entité",
 		{
 			actions    : [
 				{
-					path        : `${process.cwd()}/back/src/models/{{ camelCase routeName }}.model.js`,
+					path        : `${process.cwd()}/back/src/models/{{ camelCase entiteName }}.model.js`,
 					skipIfExists: true,
 					templateFile: "src/commands/routes/route.model.js.hbs",
 					type        : "add"
@@ -201,14 +200,13 @@ export default function (plop) {
 			prompts    : [
 				{
 					message: "Nom de l'entité :",
-					name   : "routeName",
+					name   : "entiteName",
 					type   : "input"
 				}
 			]
 		}
 	);
 
-	// Possibilité d'ajouter un champ à une entité
 	plop.setGenerator(
 		"Champ",
 		{
