@@ -17,5 +17,8 @@
 	"license": "ISC",
 	"devDependencies": {
 		"plop": "^3.1.2"
+	},
+	"dependencies": {
+		"inquirer-autocomplete-prompt": "^3.0.0"
 	}
 }

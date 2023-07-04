@@ -1,15 +1,19 @@
+import * as fs from "fs";
+import autocompletePrompt from 'inquirer-autocomplete-prompt';
+
 export default function (plop) {
+	plop.setPrompt('autocomplete', autocompletePrompt);
 	plop.setWelcomeMessage(" === Framework MAWork === \n" +
-		                       "Sélectionnez les éléments que vous voulez générer.");
+		"Sélectionnez les éléments que vous voulez générer.");
 	plop.setGenerator(
 		"Projet",
 		{
 			description: "Framework MAWork",
-			prompts    : [
+			prompts: [
 				{
 					message: "Nom du projet :",
-					name   : "name",
-					type   : "input"
+					name: "name",
+					type: "input"
 				}
 			],
 			actions    : [
@@ -30,7 +34,7 @@ export default function (plop) {
 			]
 		}
 	);
-	
+
 	plop.setGenerator(
 		"MVC",
 		{
@@ -94,7 +98,7 @@ export default function (plop) {
 			]
 		}
 	);
-	
+
 	plop.setGenerator(
 		"Vue",
 		{
@@ -134,7 +138,7 @@ export default function (plop) {
 			]
 		}
 	);
-	
+
 	plop.setGenerator(
 		"Route",
 		{
@@ -180,7 +184,7 @@ export default function (plop) {
 			]
 		}
 	);
-	
+
 	plop.setGenerator(
 		"Entité",
 		{
@@ -202,13 +206,13 @@ export default function (plop) {
 			]
 		}
 	);
-	
+
 	plop.setGenerator(
 		"Association",
 		{
 			actions    : function (data) {
 				let actions = [];
-				
+
 				actions.push(
 					{
 						path    : `${process.cwd()}/back/src/models/{{ camelCase firstEntityName }}.model.js`,
@@ -217,16 +221,16 @@ export default function (plop) {
 						type    : "append"
 					}
 				);
-				
+
 				switch (data.associationType) {
 					case "oneToOne": {
 						actions.push(
 							{
-								path    : `${process.cwd()}/back/src/models/{{ camelCase firstEntityName }}.model.js`,
-								pattern : /(\/\/ MAWORK CLI AJOUT ASSOCIATIONS NE PAS TOUCHER)/g,
+								path: `${process.cwd()}/back/src/models/{{ camelCase firstEntityName }}.model.js`,
+								pattern: /(\/\/ MAWORK CLI AJOUT ASSOCIATIONS NE PAS TOUCHER)/g,
 								template: "{{pascalCase firstEntityName}}.hasOne( {{pascalCase secondEntityName}} );\n" +
-								          "{{pascalCase secondEntityName}}.belongsTo( {{pascalCase firstEntityName}} );",
-								type    : "append"
+									"{{pascalCase secondEntityName}}.belongsTo( {{pascalCase firstEntityName}} );",
+								type: "append"
 							}
 						);
 						break;
@@ -280,13 +284,44 @@ export default function (plop) {
 				},
 				{
 					message: "Nom de la première entité :",
-					name   : "firstEntityName",
-					type   : "input"
+					name: "firstEntityName",
+					type: "autocomplete",
+					source: function (answersSoFar, input) {
+						return new Promise(
+							function (resolve) {
+								// We filter the files to get only the models
+								const entities = [];
+								fs.readdirSync(`${process.cwd()}/back/src/models`).forEach(
+									function (file) {
+										if (file !== "index.js" && file !== "db.js") {
+											entities.push(file.replace(".model.js", ""));
+											// It can't be the same entity as the seconde one, so we add it to the answersSoFar
+											answersSoFar.firstEntityName = file.replace(".model.js", "");
+										}
+									}
+								);
+								resolve(entities);
+							}
+						);
+					}
 				},
 				{
 					message: "Nom de la seconde entité :",
-					name   : "secondEntityName",
-					type   : "input"
+					name: "secondEntityName",
+					type: "autocomplete",
+					source: function (answersSoFar, input) {
+						// It can't be the same entity as the first one
+						const firstEntityName = answersSoFar.firstEntityName;
+						const entities = [];
+						fs.readdirSync(`${process.cwd()}/back/src/models`).forEach(
+							function (file) {
+								if (file !== "index.js" && file !== "db.js" && file.replace(".model.js", "") !== firstEntityName) {
+									entities.push(file.replace(".model.js", ""));
+								}
+							}
+						);
+						return entities;
+					}
 				}
 			]
 		}
