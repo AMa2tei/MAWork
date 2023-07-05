@@ -190,7 +190,7 @@ export default function (plop) {
 		{
 			actions    : [
 				{
-					path        : `${process.cwd()}/back/src/models/{{ camelCase entiteName }}.model.js`,
+					path        : `${process.cwd()}/back/src/models/{{ camelCase routeName }}.model.js`,
 					skipIfExists: true,
 					templateFile: "src/commands/routes/route.model.js.hbs",
 					type        : "add"
@@ -200,7 +200,7 @@ export default function (plop) {
 			prompts    : [
 				{
 					message: "Nom de l'entité :",
-					name   : "entiteName",
+					name   : "routeName",
 					type   : "input"
 				}
 			]
