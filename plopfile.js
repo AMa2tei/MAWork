@@ -214,12 +214,12 @@ export default function (plop) {
 				let actions = [];
 
 				// Check if required = true
-				if (data.required === "true") {
+				if (data.required === true) {
 					actions.push(
 						{
 							path    : `${process.cwd()}/back/src/models/{{ camelCase entiteName }}.model.js`,
 							pattern : /(\/\/ MAWORK CLI AJOUT CHAMP NE PAS TOUCHER)/g,
-							template: "\t\t{{camelCase champName}}: {\n\t\t\ttype: DataTypes.{{type}},\n\t\t\tallowNull: false\n\t\t\tunique: {{unique}}\n\t\t},",
+							template: "\t\t{{camelCase champName}}: {\n\t\t\ttype: DataTypes.{{type}},\n\t\t\tallowNull: false,\n\t\t\tunique: {{unique}}\n\t\t},",
 							type    : "append"
 						}
 					);
@@ -228,7 +228,7 @@ export default function (plop) {
 						{
 							path    : `${process.cwd()}/back/src/models/{{ camelCase entiteName }}.model.js`,
 							pattern : /(\/\/ MAWORK CLI AJOUT CHAMP NE PAS TOUCHER)/g,
-							template: "\t\t{{camelCase champName}}: {\n\t\t\ttype: DataTypes.{{type}},\n\t\t\tallowNull: true\n\t\t\tunique: {{unique}}\n\t\t},",
+							template: "\t\t{{camelCase champName}}: {\n\t\t\ttype: DataTypes.{{type}},\n\t\t\tallowNull: true,\n\t\t\tunique: {{unique}}\n\t\t},",
 							type    : "append"
 						}
 					);

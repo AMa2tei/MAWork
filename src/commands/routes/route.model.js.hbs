@@ -12,6 +12,9 @@ const {{pascalCase routeName}} = sequelize.define(
 			defaultValue : DataTypes.UUIDV4
 		},
         // MAWORK CLI AJOUT CHAMP NE PAS TOUCHER
+	},
+	{
+		tableName: "{{pascalCase routeName}}"
 	}
 );
 
