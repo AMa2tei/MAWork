@@ -273,6 +273,14 @@ export default function (plop) {
 								"TEXT",
 								"UUID"
 							];
+
+							// Filter the types to match the input
+							if (input) {
+								types = types.filter(function (type) {
+									return type.indexOf(input.toUpperCase()) > -1;
+								});
+							}
+
 							resolve(types);
 						});
 					}
@@ -331,12 +339,18 @@ export default function (plop) {
 						);
 						break;
 					}
-					case "ManyToMany": {
+					case "manyToMany": {
 						actions.push(
 							{
 								path    : `${process.cwd()}/back/src/models/{{ camelCase firstEntityName }}.model.js`,
 								pattern : /(\/\/ MAWORK CLI AJOUT ASSOCIATIONS NE PAS TOUCHER)/g,
-								template: "{{pascalCase secondEntityName}}.belongsToMany( {{pascalCase firstEntityName}}, {through: {{camelCase firstEntityName}}{{pascalCase secondEntityName}}} );",
+								template: "{{pascalCase secondEntityName}}.belongsToMany( {{pascalCase firstEntityName}}, {through: {{camelCase firstEntityName}}{{pascalCase secondEntityName}} });",
+								type    : "append"
+							},
+							{
+								path    : `${process.cwd()}/back/src/models/{{ camelCase firstEntityName }}.model.js`,
+								pattern : /(\/\/ MAWORK CLI AJOUT ASSOCIATIONS NE PAS TOUCHER)/g,
+								template: "{{pascalCase firstEntityName}}.belongsToMany( {{pascalCase secondEntityName}}, {through: {{camelCase firstEntityName}}{{pascalCase secondEntityName}} });",
 								type    : "append"
 							}
 						);
