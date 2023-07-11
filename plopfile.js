@@ -100,9 +100,105 @@ export default function (plop) {
 	);
 
 	plop.setGenerator(
-		"Vue",
+		"Model et API",
 		{
 			actions    : [
+				{
+					path        : `${process.cwd()}/front/app/services/{{ camelCase controllerName }}Api.js`,
+					skipIfExists: true,
+					templateFile: "src/commands/controller/ControllerApi.js.hbs",
+					type        : "add"
+				},
+				{
+					path        : `${process.cwd()}/front/app/model/{{ camelCase controllerName }}Model.js`,
+					skipIfExists: true,
+					templateFile: "src/commands/controller/ControllerModel.js.hbs",
+					type        : "add"
+				},
+				{
+					path    : `${process.cwd()}/front/index.html`,
+					pattern : /(<!-- MAWORK CLI API NE PAS TOUCHER -->)/g,
+					template: "<script type=\"application/ecmascript\" src=\"app/services/{{ camelCase controllerName }}Api.js\"></script>",
+					type    : "append"
+				},
+				{
+					path    : `${process.cwd()}/front/index.html`,
+					pattern : /(<!-- MAWORK CLI MODEL NE PAS TOUCHER -->)/g,
+					template: "<script type=\"application/ecmascript\" src=\"app/model/{{ camelCase controllerName }}Model.js\"></script>",
+					type    : "append"
+				}
+			],
+			description: "Model et API pour l’application Client de votre application MAWork",
+			prompts    : [
+				{
+					type   : "input",
+					name   : "controllerName",
+					message: "Nom du contrôleur :"
+				}
+			]
+		}
+	);
+
+	plop.setGenerator(
+		"Model",
+		{
+			actions    : [
+				{
+					path        : `${process.cwd()}/front/app/model/{{ camelCase controllerName }}Model.js`,
+					skipIfExists: true,
+					templateFile: "src/commands/controller/ControllerModel.js.hbs",
+					type        : "add"
+				},
+				{
+					path    : `${process.cwd()}/front/index.html`,
+					pattern : /(<!-- MAWORK CLI MODEL NE PAS TOUCHER -->)/g,
+					template: "<script type=\"application/ecmascript\" src=\"app/model/{{ camelCase controllerName }}Model.js\"></script>",
+					type    : "append"
+				}
+			],
+			description: "Model pour l’application Client de votre application MAWork",
+			prompts    : [
+				{
+					type   : "input",
+					name   : "controllerName",
+					message: "Nom du model :"
+				}
+			]
+		}
+	);
+
+	plop.setGenerator(
+		"API",
+		{
+			actions    : [
+				{
+					path        : `${process.cwd()}/front/app/services/{{ camelCase controllerName }}Api.js`,
+					skipIfExists: true,
+					templateFile: "src/commands/controller/ControllerApi.js.hbs",
+					type        : "add"
+				},
+				{
+					path    : `${process.cwd()}/front/index.html`,
+					pattern : /(<!-- MAWORK CLI API NE PAS TOUCHER -->)/g,
+					template: "<script type=\"application/ecmascript\" src=\"app/services/{{ camelCase controllerName }}Api.js\"></script>",
+					type    : "append"
+				},
+			],
+			description: "API pour l’application Client de votre application MAWork",
+			prompts    : [
+				{
+					type   : "input",
+					name   : "controllerName",
+					message: "Nom de l'API :"
+				}
+			]
+		}
+	);
+
+	plop.setGenerator(
+		"Vue",
+		{
+			actions: [
 				{
 					path        : `${process.cwd()}/front/views/{{ camelCase controllerName }}.html`,
 					skipIfExists: true,
