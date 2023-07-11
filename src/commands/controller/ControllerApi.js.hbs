@@ -1,6 +1,6 @@
 class {{ pascalCase controllerName }}Api {
 	constructor() {
-		this.api   = "http://127.0.0.1:3000/{{ lowerCase controllerName }}";
+		this.api   = "http://localhost:3000/{{ lowerCase controllerName }}";
         this.token = "";
         if (window.sessionStorage.getItem( "token" )) {
             this.token = window.sessionStorage.getItem( "token" )
