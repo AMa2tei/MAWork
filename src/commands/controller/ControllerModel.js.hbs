@@ -3,23 +3,23 @@ class {{ pascalCase controllerName }}Model {
 		this.api = new {{ pascalCase controllerName }}Api();
 	}
 
-    getAll{{ pascalCase controllerName }} () {
+    async getAll{{ pascalCase controllerName }} () {
         return await this.api.getAll{{ pascalCase controllerName }}();
     }
 
-	getOne{{ pascalCase controllerName }} (body) {
+	async getOne{{ pascalCase controllerName }} (body) {
         return await this.api.getOne{{ pascalCase controllerName }}(body);
     }
 
-    post{{ pascalCase controllerName }} (body) {
+	async post{{ pascalCase controllerName }} (body) {
         return await this.api.post{{ pascalCase controllerName }}(body);
     }
 
-    update{{ pascalCase controllerName }} (body) {
+	async update{{ pascalCase controllerName }} (body) {
         return await this.api.update{{ pascalCase controllerName }}(body);
     }
 
-    delete{{ pascalCase controllerName }} (body) {
+	async delete{{ pascalCase controllerName }} (body) {
         return await this.api.delete{{ pascalCase controllerName }}(body);
     }
 }
