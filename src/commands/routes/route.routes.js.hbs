@@ -17,6 +17,25 @@ router.get(
 	}
 );
 
+router.get(
+	"/{{ camelCase controllerName }}",
+	async (
+		req,
+		res
+	) => {
+		res.status( 200 )
+		   .send(
+		       await {{ pascalCase routeName }}.findOne(
+                    {
+		               where : {
+		                   id : req.body.id
+		               }
+		           }
+		       )
+		   );
+	}
+);
+
 router.post(
     "/",
     async (
