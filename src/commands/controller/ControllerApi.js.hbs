@@ -21,9 +21,10 @@ class {{ pascalCase controllerName }}Api {
     getOne{{ pascalCase controllerName }} () {
         return fetchJSON(
             this.api,
-            methods.get,
+            methods.post,
 			"/{{ camelCase controllerName }}",
-            this.token
+            this.token,
+			body
         );
     }
 
