@@ -7,6 +7,10 @@ class {{ pascalCase controllerName }}Model {
         return await this.api.getAll{{ pascalCase controllerName }}();
     }
 
+	getOne{{ pascalCase controllerName }} (body) {
+        return await this.api.getOne{{ pascalCase controllerName }}(body);
+    }
+
     post{{ pascalCase controllerName }} (body) {
         return await this.api.post{{ pascalCase controllerName }}(body);
     }

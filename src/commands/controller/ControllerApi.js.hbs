@@ -18,7 +18,7 @@ class {{ pascalCase controllerName }}Api {
         );
     }
 
-    getOne{{ pascalCase controllerName }} () {
+    getOne{{ pascalCase controllerName }} (body) {
         return fetchJSON(
             this.api,
             methods.post,
