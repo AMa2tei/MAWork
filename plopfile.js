@@ -133,7 +133,7 @@ export default function (plop) {
 				{
 					type   : "input",
 					name   : "controllerName",
-					message: "Nom du contrôleur :"
+					message: "Nom pour le model et l'API :"
 				}
 			]
 		}
