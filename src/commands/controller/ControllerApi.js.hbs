@@ -13,7 +13,7 @@ class {{ pascalCase controllerName }}Api {
         return fetchJSON(
             this.api,
             methods.get,
-            "/{{ camelCase controllerName }}",
+			"",
             this.token
         );
     }
@@ -22,7 +22,7 @@ class {{ pascalCase controllerName }}Api {
         return fetchJSON(
             this.api,
             methods.get,
-            "",
+			"/{{ camelCase controllerName }}",
             this.token
         );
     }
