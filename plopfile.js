@@ -64,7 +64,7 @@ export default function (plop) {
 					type        : "add"
 				},
 				{
-					path        : `${process.cwd()}/front/res/css/{{ camelCase controllerName }}Stylesheet.scss`,
+					path        : `${process.cwd()}/front/res/css/_{{ camelCase controllerName }}Stylesheet.scss`,
 					skipIfExists: true,
 					templateFile: "src/commands/controller/ControllerStylesheet.scss",
 					type        : "add"
@@ -84,7 +84,7 @@ export default function (plop) {
 				{
 					path    : `${process.cwd()}/front/res/css/index.scss`,
 					pattern : /(\/\/ MAWORK CLI SCSS IMPORTER NE PAS TOUCHER)/g,
-					template: "@import \"{{ camelCase controllerName }}Stylesheet\";",
+					template: "@use \"{{ camelCase controllerName }}Stylesheet\";",
 					type    : "append"
 				}
 			],
@@ -212,7 +212,7 @@ export default function (plop) {
 					type        : "add"
 				},
 				{
-					path        : `${process.cwd()}/front/res/css/{{ camelCase controllerName }}Stylesheet.scss`,
+					path        : `${process.cwd()}/front/res/css/_{{ camelCase controllerName }}Stylesheet.scss`,
 					skipIfExists: true,
 					templateFile: "src/commands/controller/ControllerStylesheet.scss",
 					type        : "add"
@@ -220,7 +220,7 @@ export default function (plop) {
 				{
 					path    : `${process.cwd()}/front/res/css/index.scss`,
 					pattern : /(\/\/ MAWORK CLI SCSS IMPORTER NE PAS TOUCHER)/g,
-					template: "@import \"{{ camelCase controllerName }}Stylesheet\";",
+					template: "@use \"{{ camelCase controllerName }}Stylesheet\";",
 					type    : "append"
 				}
 			],
