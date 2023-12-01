@@ -3,6 +3,7 @@ const {
 	      initializeConfigMiddlewares,
 	      initializeErrorMiddlwares
       }       = require("./middlewares");
+const { sequelize } = require( "../models/db" );
 
 // MAWORK CLI IMPORTER NE PAS TOUCHER
 
@@ -14,10 +15,17 @@ class WebServer {
 
 	constructor() {
 		this.app = express();
+		this.syncDb()
+		    .then( _ => {
+		    } );
 
 		initializeConfigMiddlewares(this.app);
 		this._initializeRoutes();
 		initializeErrorMiddlwares(this.app);
+	}
+	
+	async syncDb() {
+		await sequelize.sync( { force : true } );
 	}
 
 	start() {
