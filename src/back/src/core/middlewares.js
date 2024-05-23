@@ -31,10 +31,21 @@ const initLoggerMiddlware = (app) => {
 	});
 };
 
+const initStaticPages = ( app ) => {
+	app.use(
+		"/",
+		express.static( path.join(
+			__dirname,
+			"../../../front"
+		) )
+	);
+};
+
 exports.initializeConfigMiddlewares = (app) => {
 	initJsonHandlerMiddlware(app);
 	initCorsMiddlware(app);
 	initLoggerMiddlware(app);
+	initStaticPages( app );
 };
 
 exports.initializeErrorMiddlwares = (app) => {

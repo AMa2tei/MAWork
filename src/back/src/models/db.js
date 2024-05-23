@@ -5,7 +5,7 @@ require("dotenv")
 		{
 			path: path.join(
 				__dirname,
-				"../../.env.sequelize"
+				"../../.env"
 			)
 		}
 	);
